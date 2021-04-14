@@ -1,4 +1,7 @@
 import requests
+import time
+import dateutil.parser
+from datetime import date
 
 url = "https://ca.global.nba.com/stats2/scores/daily.json?countryCode=CA&locale=en&tz=-5"
 headers = {
@@ -18,5 +21,11 @@ for game in response['payload']['date']['games']:
     homeScore = game['boxscore']['homeScore']
     clock = game['boxscore']['periodClock']
     statusDesc = game['boxscore']['statusDesc']
+    startTime = dateutil.parser.parse(game['profile']['dateTimeEt'])
 
-    print(f'{awayAbbr}: {awayScore}, {homeAbbr}: {homeScore} - {clock} {statusDesc}')
+    if statusDesc is not None:
+        print(
+            f'{awayAbbr}: {awayScore}, {homeAbbr}: {homeScore} - {clock} {statusDesc}')
+    else:
+        print(f'{awayAbbr} VS. {homeAbbr} - {startTime.strftime("%I:%M %p")}')
+
