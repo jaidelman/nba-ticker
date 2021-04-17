@@ -29,3 +29,5 @@ for game in response['payload']['date']['games']:
     else:
         print(f'{awayAbbr} VS. {homeAbbr} - {startTime.strftime("%I:%M %p")}')
 
+    # Idea: Grab scores between 5-12pm, otherwise show yesterday's scores/upcoming games (which we don't need to ping for)
+    # - If all games haven't started, don't ping until the next hour
