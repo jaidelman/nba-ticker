@@ -1,5 +1,9 @@
 import json
 import requests
+import teamColors
+import time
+import dateutil.parser
+from datetime import date
 
 
 def lambda_handler(event, context):
@@ -23,7 +27,14 @@ def lambda_handler(event, context):
         homeScore = game['boxscore']['homeScore']
         clock = game['boxscore']['periodClock']
         statusDesc = game['boxscore']['statusDesc']
-        startTime = game['profile']['dateTimeEt']
+        startTime = dateutil.parser.parse(game['profile']['dateTimeEt'])
+        awayColors = teamColors.colors[awayAbbr]
+        homeColors = teamColors.colors[homeAbbr]
+
+        if statusDesc is not None:
+            statusDesc = statusDesc.upper()
+        else:
+            statusDesc = startTime.strftime("%I:%M %p")
 
         obj = {
             'awayAbbr': awayAbbr,
@@ -32,7 +43,8 @@ def lambda_handler(event, context):
             'homeScore': homeScore,
             'clock': clock,
             'statusDesc': statusDesc,
-            'startTime': startTime
+            'awayColors': awayColors,
+            'homeColors': homeColors
         }
         games.append(obj)
 
