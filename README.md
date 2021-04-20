@@ -12,6 +12,6 @@ The code is written in Python using Adafruit and CircuitPython's libraries to co
 ## Lambda.py
 `lambda.py` is the code I wrote for the lambda function running on AWS to gets live scores from NBA.com. I set it up through API Gateway to be triggered by an API call. The API requires authentication through an API key. The URL and API-KEY of this API are not included in this project but should be stored in a `secrets.py` file for `code.py` to successfully make the request
 
-
-https://user-images.githubusercontent.com/32146689/115320747-73f7b000-a150-11eb-982b-293c588a6055.mov
+# Example
+https://user-images.githubusercontent.com/32146689/115321024-f7190600-a150-11eb-9d12-23a86ed8525d.mov
 
