@@ -22,7 +22,7 @@ URL = secrets['aws-api-url']
 HEADERS = {
     'x-api-key': secrets['x-api-key']
 }
-    
+
 # --- MatrixPortal --- #
 
 matrixportal = MatrixPortal(
@@ -104,46 +104,83 @@ matrixportal.add_text(
 
 # Replaces the score with the time and quarter and scrolls
 # the time across the board
-def displayTime(index):
-    game = data['body']['payload'][index]
+
+
+def displayTime(game):
     matrixportal.set_text("", 0)
     matrixportal.set_text("", 1)
     matrixportal.set_text("", 2)
     matrixportal.set_text("", 3)
     
+    matrixportal.set_text_color(game["homeColors"]["primary"], 8)
     if game['statusDesc'] is not None:
         matrixportal.set_text(f'{game["clock"]} {game["statusDesc"]}', 8)
     else:
-        matrixportal.set_text(f'{game["awayAbbr"]} VS. {game["homeAbbr"]} - {game["startTime"]}', 8)
+        matrixportal.set_text(
+            f'{game["awayAbbr"]} VS. {game["homeAbbr"]} - {game["startTime"]}', 8)
     matrixportal.scroll_text(SCROLL_SPEED)
 
 # Gets the scores from our API and stores them in a data object
+
+
 def getScores():
     gc.collect()
     response = matrixportal.fetch()
     data = json.loads(response)
 
-    return data    
+    return data
 
 # Sets the scores on the board
-def setScore(index):
-    game = data['body']['payload'][index]
-    matrixportal.set_text(game["awayScore"], 0) # Away Score Shadow
-    matrixportal.set_text(game["awayScore"], 2) # Away Score
-    matrixportal.set_text(game["homeScore"], 1) # Home Score Shadow
-    matrixportal.set_text(game["homeScore"], 3) # Home Score
-    matrixportal.set_text(game["awayAbbr"], 4)  # Away Name Shadow
-    matrixportal.set_text(game["awayAbbr"], 6)  # Away Name
-    matrixportal.set_text(game["homeAbbr"], 5)  # Home Name Shadow
-    matrixportal.set_text(game["homeAbbr"], 7)  # Home Name
+
+
+def setScore(game):
+    # Away Score Shadow
+    matrixportal.set_text(game["awayScore"], 0)
+    matrixportal.set_text_color(game["awayColors"]["alt"], 0)
+    
+    # Away Score
+    matrixportal.set_text(game["awayScore"], 2)
+    matrixportal.set_text_color(game["awayColors"]["primary"], 2)
+    
+    # Home Score Shadow
+    matrixportal.set_text(game["homeScore"], 1)
+    matrixportal.set_text_color(game["homeColors"]["alt"], 1)
+    
+    # Home Score
+    matrixportal.set_text(game["homeScore"], 3)
+    matrixportal.set_text_color(game["homeColors"]["primary"], 3)
+    
+    # Away Name Shadow
+    matrixportal.set_text(game["awayAbbr"], 4)
+    matrixportal.set_text_color(game["awayColors"]["alt"], 4)
+    
+    # Away Name
+    matrixportal.set_text(game["awayAbbr"], 6)
+    matrixportal.set_text_color(game["awayColors"]["primary"], 6)
+    
+    # Home Name Shadow
+    matrixportal.set_text(game["homeAbbr"], 5)
+    matrixportal.set_text_color(game["homeColors"]["alt"], 5)
+    
+    # Home Name
+    matrixportal.set_text(game["homeAbbr"], 7)
+    matrixportal.set_text_color(game["homeColors"]["primary"], 7)
+
 
 # Im doing this to avoid having to import more libraries, saving necessary memory
 # We can 'await' by using `if data is not None:` in our loop
 data = None
 data = getScores()
 
+index = 0
 while True:
     if data is not None:
-        setScore(0)
+        game = data['body']['payload'][index]
+        setScore(game)
         time.sleep(5)
-        displayTime(0)
+        displayTime(game)
+
+        if index < len(data['body']['payload']) - 1:
+            index += 1
+        else:
+            index = 0
