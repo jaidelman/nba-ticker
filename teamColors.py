@@ -1,123 +1,143 @@
+RED = "0xFF0000"
+LIGHT_PURPLE = "0x753BBD"
+DARK_PURPLE = "0x1D1160"
+LAKERS_PURPLE = "0x552583"
+LIGHT_BLUE = "0x1D428A"
+DARK_BLUE = "0x002D62"
+NAVY_BLUE = "0x0E2240"
+MIAMI_BLUE = "0x41B6E6"
+ORANGE = "0xEF3B24"
+YELLOW = "0xFFC72C"
+GREEN = "0x007A33"
+LIME = "0xAEC120"
+WHITE = "0xFFFFFF"
+WINE = "0x6F263D"
+GOLD = "0xFFB81C"
+PINK = "0xDB3EB1"
+ORANGE = "0xE56020"
+ORANGE_RED = "0xEF3B24"
+GRAY = "0x637270"
+
 colors = {
     "ATL": {
-        "primary": "E03A3E",
-        "alt": "C1D32F"
+        "primary": RED,
+        "alt": LIME
     },
     "BOS": {
-        "primary": "007A33",
-        "alt": "BA9653"
+        "primary": GREEN,
+        "alt": WHITE
     },
-    "BRK": {
-        "primary": "777D84",
-        "alt": "FFFFFF"
+    "BKN": {
+        "primary": LIGHT_BLUE,
+        "alt": RED
     },
     "CHA": {
-        "primary": "1D1160",
-        "alt": "00788C"
+        "primary": LIGHT_BLUE,
+        "alt": DARK_PURPLE
     },
     "CHI": {
-        "primary": "CE1141",
-        "alt": "FFFFFF"
+        "primary": RED,
+        "alt": WHITE
     },
     "CLE": {
-        "primary": "860038",
-        "alt": "FDBB30"
+        "primary": WINE,
+        "alt": GOLD
     },
     "DAL": {
-        "primary": "002B5E",
-        "alt": "00538C"
+        "primary": LIGHT_BLUE,
+        "alt": NAVY_BLUE
     },
     "DEN": {
-        "primary": "0E2240",
-        "alt": "FEC524"
+        "primary": NAVY_BLUE,
+        "alt": YELLOW
     },
     "DET": {
-        "primary": "C8102E",
-        "alt": "1D42BA"
+        "primary": RED,
+        "alt": LIGHT_BLUE
     },
     "GSW": {
-        "primary": "1D428A",
-        "alt": "FFC72C"
+        "primary": YELLOW,
+        "alt": LIGHT_BLUE
     },
     "HOU": {
-        "primary": "CE1141",
-        "alt": "C4CED4"
+        "primary": RED,
+        "alt": WHITE
     },
     "IND": {
-        "primary": "002D62",
-        "alt": "FDBB30"
+        "primary": DARK_BLUE,
+        "alt": YELLOW
     },
     "LAC": {
-        "primary": "C8102E",
-        "alt": "1D428A"
+        "primary": RED,
+        "alt": DARK_BLUE
     },
     "LAL": {
-        "primary": "552583",
-        "alt": "FDB927"
+        "primary": LAKERS_PURPLE,
+        "alt": YELLOW
     },
     "MEM": {
-        "primary": "5D76A9",
-        "alt": "12173F"
+        "primary": LIGHT_BLUE,
+        "alt": NAVY_BLUE
     },
     "MIA": {
-        "primary": "41B6E6",
-        "alt": "DB3EB1"
+        "primary": MIAMI_BLUE,
+        "alt": PINK
     },
     "MIL": {
-        "primary": "2C5234",
-        "alt": "702F8A"
+        "primary": GREEN,
+        "alt": LIGHT_PURPLE
     },
     "MIN": {
-        "primary": "0C2340",
-        "alt": "236192"
+        "primary": LIME,
+        "alt": NAVY_BLUE
     },
     "NOP": {
-        "primary": "0C2340",
-        "alt": "C8102E"
+        "primary": NAVY_BLUE,
+        "alt": GOLD
     },
     "NYK": {
-        "primary": "006BB6",
-        "alt": "F58426"
+        "primary": DARK_BLUE,
+        "alt": ORANGE
     },
     "OKC": {
-        "primary": "007AC1",
-        "alt": "EF3B24"
+        "primary": LIGHT_BLUE,
+        "alt": ORANGE_RED
     },
     "ORL": {
-        "primary": "0077C0",
-        "alt": "C4CED4"
+        "primary": LIGHT_BLUE,
+        "alt": WHITE
     },
     "PHI": {
-        "primary": "006BB6",
-        "alt": "ED174C"
+        "primary": LIGHT_BLUE,
+        "alt": RED
     },
     "PHX": {
-        "primary": "1D1160",
-        "alt": "E56020"
+        "primary": ORANGE,
+        "alt": DARK_PURPLE
     },
     "POR": {
-        "primary": "E03A3E",
-        "alt": "FFFFFF"
+        "primary": RED,
+        "alt": WHITE
     },
     "SAC": {
-        "primary": "5A2D81",
-        "alt": "63727A"
+        "primary": LIGHT_BLUE,
+        "alt": GRAY
     },
     "SAS": {
-        "primary": "8A8D8F",
-        "alt": "EF426F"
+        "primary": PINK,
+        "alt": MIAMI_BLUE
     },
     "TOR": {
-        "primary": "BA0C2F",
-        "alt": "753BBD"
+        "primary": LIGHT_PURPLE,
+        "alt": RED
     },
     "UTA": {
-        "primary": "00275D",
-        "alt": "6CAEDF"
+        "primary": LIGHT_BLUE,
+        "alt": DARK_BLUE
     },
     "WAS": {
-        "primary": "002B5C",
-        "alt": "E31837"
+        "primary": NAVY_BLUE,
+        "alt": RED
     },
 
 }
