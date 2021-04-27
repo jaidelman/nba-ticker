@@ -111,10 +111,13 @@ def displayTime(game):
     matrixportal.set_text("", 1)
     matrixportal.set_text("", 2)
     matrixportal.set_text("", 3)
-    
+
     matrixportal.set_text_color(game["homeColors"]["primary"], 8)
-    if game['statusDesc'] is not None:
+
+    if game['statusDesc'] is not None and game['clock'] is not None:
         matrixportal.set_text(f'{game["clock"]} {game["statusDesc"]}', 8)
+    elif game['statusDesc'] is not None:
+        matrixportal.set_text(game["statusDesc"], 8)
     else:
         matrixportal.set_text(
             f'{game["awayAbbr"]} VS. {game["homeAbbr"]} - {game["startTime"]}', 8)
@@ -124,6 +127,7 @@ def displayTime(game):
 
 
 def getScores():
+    print("Updating scores")
     gc.collect()
     response = matrixportal.fetch()
     data = json.loads(response)
@@ -134,51 +138,65 @@ def getScores():
 
 
 def setScore(game):
-    # Away Score Shadow
-    matrixportal.set_text(game["awayScore"], 0)
-    matrixportal.set_text_color(game["awayColors"]["alt"], 0)
-    
-    # Away Score
-    matrixportal.set_text(game["awayScore"], 2)
-    matrixportal.set_text_color(game["awayColors"]["primary"], 2)
-    
-    # Home Score Shadow
-    matrixportal.set_text(game["homeScore"], 1)
-    matrixportal.set_text_color(game["homeColors"]["alt"], 1)
-    
-    # Home Score
-    matrixportal.set_text(game["homeScore"], 3)
-    matrixportal.set_text_color(game["homeColors"]["primary"], 3)
-    
+
     # Away Name Shadow
     matrixportal.set_text(game["awayAbbr"], 4)
     matrixportal.set_text_color(game["awayColors"]["alt"], 4)
-    
+
     # Away Name
     matrixportal.set_text(game["awayAbbr"], 6)
     matrixportal.set_text_color(game["awayColors"]["primary"], 6)
-    
+
     # Home Name Shadow
     matrixportal.set_text(game["homeAbbr"], 5)
     matrixportal.set_text_color(game["homeColors"]["alt"], 5)
-    
+
     # Home Name
     matrixportal.set_text(game["homeAbbr"], 7)
     matrixportal.set_text_color(game["homeColors"]["primary"], 7)
 
+    if game["awayScore"] == 0 and game["homeScore"] == 0:
+        return False
+    else:
+        # Away Score Shadow
+        matrixportal.set_text(game["awayScore"], 0)
+        matrixportal.set_text_color(game["awayColors"]["alt"], 0)
 
-# Im doing this to avoid having to import more libraries, saving necessary memory
-# We can 'await' by using `if data is not None:` in our loop
+        # Away Score
+        matrixportal.set_text(game["awayScore"], 2)
+        matrixportal.set_text_color(game["awayColors"]["primary"], 2)
+
+        # Home Score Shadow
+        matrixportal.set_text(game["homeScore"], 1)
+        matrixportal.set_text_color(game["homeColors"]["alt"], 1)
+
+        # Home Score
+        matrixportal.set_text(game["homeScore"], 3)
+        matrixportal.set_text_color(game["homeColors"]["primary"], 3)
+
+        return True
+
+
 data = None
-data = getScores()
-
+refresh_time = None
 index = 0
 while True:
+
+    if (not refresh_time) or (time.monotonic() - refresh_time) > 900:
+        data = getScores()
+        refresh_time = time.monotonic()
+
     if data is not None:
         game = data['body']['payload'][index]
-        setScore(game)
-        time.sleep(5)
-        displayTime(game)
+        gameStarted = setScore(game)
+
+        if gameStarted:
+            time.sleep(5)
+            displayTime(game)
+        else:
+            displayTime(game)
+            time.sleep(2)
+            displayTime(game)
 
         if index < len(data['body']['payload']) - 1:
             index += 1
