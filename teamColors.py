@@ -96,8 +96,8 @@ colors = {
         "alt": GOLD
     },
     "NYK": {
-        "primary": DARK_BLUE,
-        "alt": ORANGE
+        "primary": ORANGE,
+        "alt": DARK_BLUE
     },
     "OKC": {
         "primary": LIGHT_BLUE,
@@ -116,16 +116,16 @@ colors = {
         "alt": DARK_PURPLE
     },
     "POR": {
-        "primary": RED,
+        "primary": RED, 
         "alt": WHITE
     },
     "SAC": {
-        "primary": LIGHT_BLUE,
+        "primary": LIGHT_PURPLE,
         "alt": GRAY
     },
     "SAS": {
-        "primary": PINK,
-        "alt": MIAMI_BLUE
+        "primary": GRAY,
+        "alt": WHITE
     },
     "TOR": {
         "primary": RED,
