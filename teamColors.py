@@ -128,8 +128,8 @@ colors = {
         "alt": MIAMI_BLUE
     },
     "TOR": {
-        "primary": LIGHT_PURPLE,
-        "alt": RED
+        "primary": RED,
+        "alt": LIGHT_PURPLE
     },
     "UTA": {
         "primary": LIGHT_BLUE,
