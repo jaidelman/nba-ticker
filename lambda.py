@@ -9,7 +9,7 @@ from datetime import date
 def lambda_handler(event, context):
     url = "https://ca.global.nba.com/stats2/scores/daily.json?countryCode=CA&locale=en&tz=-5"
     headers = {
-        "User-Agent ": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+        "User-Agent ": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36",
         "Content-Type": "application/json;charset=UTF-8",
         "Accept": "*/*",
         "Accept-ranges": "bytes",
