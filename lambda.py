@@ -50,7 +50,6 @@ def lambda_handler(event, context):
 
     payload['payload'] = games
 
-    # TODO implement
     return {
         'statusCode': 200,
         'body': payload
