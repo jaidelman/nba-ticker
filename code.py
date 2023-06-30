@@ -45,55 +45,64 @@ BOTTOM_ROW_HEIGHT = int(
 
 # --- Text Fields --- #
 
-# Team One Score Shadow
+# Away Score Shadow
+AWAY_SCORE_SHADOW = 0
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_ONE_SHADOW_X, BOTTOM_ROW_HEIGHT)
 )
 
-# Team Two Score Shadow
+# Home Score Shadow
+HOME_SCORE_SHADOW = 1
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_TWO_SHADOW_X, BOTTOM_ROW_HEIGHT)
 )
 
-# Team One Score
+# Away Score
+AWAY_SCORE = 2
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_ONE_X, BOTTOM_ROW_HEIGHT)
 )
 
-# Team Two Score
+# Home Score
+HOME_SCORE = 3
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_TWO_X, BOTTOM_ROW_HEIGHT)
 )
 
-# Team One Name Shadow
+# Away Name Shadow
+AWAY_NAME_SHADOW = 4
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_ONE_SHADOW_X, TOP_ROW_HEIGHT)
 )
 
-# Team Two Name Shadow
+# Home Name Shadow
+HOME_NAME_SHADOW = 5
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_TWO_SHADOW_X, TOP_ROW_HEIGHT)
 )
 
-# Team One Name
+# Away Name
+AWAY_NAME = 6
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_ONE_X, TOP_ROW_HEIGHT)
 )
 
-# Team Two Name
+# Home Name
+HOME_NAME = 7
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_TWO_X, TOP_ROW_HEIGHT)
 )
 
 # Time
+TIME = 8
 matrixportal.add_text(
     text_font=FONT,
     text_position=(TEAM_ONE_X, BOTTOM_ROW_HEIGHT),
@@ -105,24 +114,25 @@ matrixportal.add_text(
 # Replaces the score with the time and quarter and scrolls
 # the time across the board
 def displayTime(game):
-    matrixportal.set_text("", 0)
-    matrixportal.set_text("", 1)
-    matrixportal.set_text("", 2)
-    matrixportal.set_text("", 3)
+    # Stop displaying scores
+    matrixportal.set_text("", AWAY_SCORE_SHADOW)
+    matrixportal.set_text("", HOME_SCORE_SHADOW)
+    matrixportal.set_text("", AWAY_SCORE)
+    matrixportal.set_text("", HOME_SCORE)
     
     # If away team is winning use their color, if home team is winning (or game hasn't started) use home color
     if game["awayScore"] > game["homeScore"]:
-        matrixportal.set_text_color(game["awayColors"]["primary"], 8)
+        matrixportal.set_text_color(game["awayColors"]["primary"], TIME)
     else:
-        matrixportal.set_text_color(game["homeColors"]["primary"], 8)
+        matrixportal.set_text_color(game["homeColors"]["primary"], TIME)
 
     # Based on the info we have display different things
     if game['statusDesc'] is not None and game['clock'] is not None:
-        matrixportal.set_text(f'{game["clock"]} {game["statusDesc"]}', 8)
+        matrixportal.set_text(f'{game["clock"]} {game["statusDesc"]}', TIME)
     elif game['statusDesc'] is not None:
-        matrixportal.set_text(game["statusDesc"], 8)
+        matrixportal.set_text(game["statusDesc"], TIME)
     else:
-        matrixportal.set_text(f'{game["awayAbbr"]} VS. {game["homeAbbr"]} - {game["startTime"]}', 8)
+        matrixportal.set_text(f'{game["awayAbbr"]} VS. {game["homeAbbr"]} - {game["startTime"]}', TIME)
     matrixportal.scroll_text(SCROLL_SPEED)
 
 # Gets the scores from our API and stores them in a data object
@@ -138,39 +148,39 @@ def getScores():
 def setScore(game):
     
     # Away Name Shadow
-    matrixportal.set_text(game["awayAbbr"], 4)
-    matrixportal.set_text_color(game["awayColors"]["alt"], 4)
+    matrixportal.set_text(game["awayAbbr"], AWAY_NAME_SHADOW)
+    matrixportal.set_text_color(game["awayColors"]["alt"], AWAY_NAME_SHADOW)
     
     # Away Name
-    matrixportal.set_text(game["awayAbbr"], 6)
-    matrixportal.set_text_color(game["awayColors"]["primary"], 6)
+    matrixportal.set_text(game["awayAbbr"], AWAY_NAME)
+    matrixportal.set_text_color(game["awayColors"]["primary"], AWAY_NAME)
     
     # Home Name Shadow
-    matrixportal.set_text(game["homeAbbr"], 5)
-    matrixportal.set_text_color(game["homeColors"]["alt"], 5)
+    matrixportal.set_text(game["homeAbbr"], HOME_NAME_SHADOW)
+    matrixportal.set_text_color(game["homeColors"]["alt"], HOME_NAME_SHADOW)
     
     # Home Name
-    matrixportal.set_text(game["homeAbbr"], 7)
-    matrixportal.set_text_color(game["homeColors"]["primary"], 7)
+    matrixportal.set_text(game["homeAbbr"], HOME_NAME)
+    matrixportal.set_text_color(game["homeColors"]["primary"], HOME_NAME)
     
     if game["awayScore"] == 0 and game["homeScore"] == 0:
         return False
     else:
         # Away Score Shadow
-        matrixportal.set_text(game["awayScore"], 0)
-        matrixportal.set_text_color(game["awayColors"]["alt"], 0)
+        matrixportal.set_text(game["awayScore"], AWAY_SCORE_SHADOW)
+        matrixportal.set_text_color(game["awayColors"]["alt"], AWAY_SCORE_SHADOW)
         
         # Away Score
-        matrixportal.set_text(game["awayScore"], 2)
-        matrixportal.set_text_color(game["awayColors"]["primary"], 2)
+        matrixportal.set_text(game["awayScore"], AWAY_SCORE)
+        matrixportal.set_text_color(game["awayColors"]["primary"], AWAY_SCORE)
         
         # Home Score Shadow
-        matrixportal.set_text(game["homeScore"], 1)
-        matrixportal.set_text_color(game["homeColors"]["alt"], 1)
+        matrixportal.set_text(game["homeScore"], HOME_SCORE_SHADOW)
+        matrixportal.set_text_color(game["homeColors"]["alt"], HOME_SCORE_SHADOW)
         
         # Home Score
-        matrixportal.set_text(game["homeScore"], 3)
-        matrixportal.set_text_color(game["homeColors"]["primary"], 3)
+        matrixportal.set_text(game["homeScore"], HOME_SCORE)
+        matrixportal.set_text_color(game["homeColors"]["primary"], HOME_SCORE)
         
         return True
 
@@ -220,7 +230,7 @@ while True:
             displayTime(game)
             time.sleep(2)
         
-        # Increment index
+        # Increment index or reset if all games have been displayed
         if i < len(data['body']['payload'])*2 - 1:
             i += 1
         else:
